@@ -1,0 +1,17 @@
+{
+    "name": "lancerhe/php-crypt",
+    "description": "php library crypt.",
+    "authors": [
+        {
+            "name": "Lancer He",
+            "email": "lancer.he@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {},
+    "autoload": {
+        "psr-0": {
+            "Crypt": "src"
+        }
+    }
+}
