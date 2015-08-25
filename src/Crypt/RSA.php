@@ -124,7 +124,7 @@ Class RSA {
         }
         $this->setupPrivateKey();
         
-        $r = openssl_private_decrypt($encrypted, $decrypted, $this->_private_key);
+        $r = openssl_private_decrypt(base64_decode($encrypted), $decrypted, $this->_private_key);
         if($r) {
             return $decrypted;
         }
@@ -145,7 +145,7 @@ Class RSA {
         
         $r = openssl_public_encrypt($data, $encrypted, $this->_public_key);
         if($r) {
-            return $encrypted;
+            return base64_encode($encrypted);
         }
         return null;
     }
