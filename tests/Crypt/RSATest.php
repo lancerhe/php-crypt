@@ -12,7 +12,7 @@ use Crypt\RSA;
 class RSATest extends \PHPUnit_Framework_TestCase {
 
     public function setUp() {
-        $this->crypt = new RSA('/tmp/phpunit/');
+        $this->crypt = new RSA('/tmp/');
     }
 
     /**
@@ -20,8 +20,8 @@ class RSATest extends \PHPUnit_Framework_TestCase {
      */
     public function createKey() {
         $this->crypt->createKey();
-        $this->assertTrue(file_exists('/tmp/phpunit/priv.key'));
-        $this->assertTrue(file_exists('/tmp/phpunit/pub.key'));
+        $this->assertTrue(file_exists('/tmp/priv.key'));
+        $this->assertTrue(file_exists('/tmp/pub.key'));
     }
 
     /**
@@ -50,7 +50,7 @@ class RSATest extends \PHPUnit_Framework_TestCase {
      * @test
      */
     public function getPublicKeyModulus() {
-        file_put_contents('/tmp/phpunit/priv.key', file_get_contents(dirname(__FILE__) . '/RSASetup/priv.key'));
+        file_put_contents('/tmp/priv.key', file_get_contents(dirname(__FILE__) . '/RSASetup/priv.key'));
         $modulus = $this->crypt->getPublicKeyModulus();
         $this->assertEquals(file_get_contents(dirname(__FILE__) . '/RSASetup/pubmodulus'), $modulus);
     }
@@ -98,7 +98,8 @@ class RSATest extends \PHPUnit_Framework_TestCase {
     }
 
     public function tearDown() {
-        exec("rm -rf /tmp/phpunit");
+        file_exists("/tmp/priv.key") && unlink("/tmp/priv.key");
+        file_exists("/tmp/pub.key")  && unlink("/tmp/pub.key");
         unset($this->crypt);
     }
 }

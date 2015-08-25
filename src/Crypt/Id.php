@@ -1,13 +1,10 @@
 <?php
 /**
-* 将id数字转化定长字符串算法 
-*
-* @category Library
-* @package  Crypt
-* @author   Lancer He <lancer.he@gmail.com>
-* @version  1.0 
-* @link     http://kvz.io/blog/2009/06/10/create-short-ids-with-php-like-youtube-or-tinyurl/
-*/
+ * 短地址算法，将id数字转化定长字符串算法 
+ * @author   Lancer He <lancer.he@gmail.com>
+ * @version  1.0 
+ * @link     http://kvz.io/blog/2009/06/10/create-short-ids-with-php-like-youtube-or-tinyurl/
+ */
 
 namespace Crypt;
 

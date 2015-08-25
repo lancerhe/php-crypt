@@ -1,7 +1,7 @@
 <?php
 /**
- * @desc Crypt_3DES加解密类
- * @notice 可与java的3DES(DESede)加密方式兼容
+ * 3DES 加解密类
+ * 可与java的3DES(DESede)加密方式兼容
  */
 
 namespace Crypt;

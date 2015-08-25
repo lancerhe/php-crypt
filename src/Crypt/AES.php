@@ -1,8 +1,7 @@
 <?php
 /**
- * @desc Crypt_AES加解密类
+ * AES 加解密类 need extension mcrypt.so
  * @author Alexander_Li
- * @notice 本类使用前需要安装extension=php_mcrypt.dll扩展
  */
 
 namespace Crypt;

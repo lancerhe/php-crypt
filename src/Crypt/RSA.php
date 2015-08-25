@@ -1,6 +1,6 @@
 <?php
 /**
- * @desc Crypt_RSA加解密类
+ * Crypt_RSA加解密类
  */
 
 namespace Crypt;
@@ -11,7 +11,7 @@ Class RSA {
 
     protected $_public_key;
 
-    protected $_key_path = "/tmp/phprsa/";
+    protected $_key_path = "./keys";
 
     /**
      * @desc   设置密钥路径
