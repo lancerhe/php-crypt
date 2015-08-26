@@ -1,8 +1,7 @@
 PHP Crypt
 ============
 
-[![Latest Stable Version](https://poser.pugx.org/mtdowling/cron-expression/v/stable.png)](https://packagist.org/packages/lancerhe/php-crypt) [![Total Downloads](https://poser.pugx.org/mtdowling/cron-expression/downloads.png)](https://packagist.org/packages/lancerhe/php-crypt) 
-
+[![Latest Stable Version](https://poser.pugx.org/lancerhe/php-crypt/v/stable)](https://packagist.org/packages/lancerhe/php-crypt) [![Total Downloads](https://poser.pugx.org/lancerhe/php-crypt/downloads)](https://packagist.org/packages/lancerhe/php-crypt) [![Latest Unstable Version](https://poser.pugx.org/lancerhe/php-crypt/v/unstable)](https://packagist.org/packages/lancerhe/php-crypt) [![License](https://poser.pugx.org/lancerhe/php-crypt/license)](https://packagist.org/packages/lancerhe/php-crypt)
 
 Crypt for AES, RSA, 3DES and some special algorithms.
 
