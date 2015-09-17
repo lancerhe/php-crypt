@@ -18,7 +18,7 @@ Create or modify your composer.json
 ``` json
 {
     "require": {
-        "lancerhe/php-http": "dev-master"
+        "lancerhe/php-crypt": "dev-master"
     }
 }
 ```
