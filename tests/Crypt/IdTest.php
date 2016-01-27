@@ -1,14 +1,14 @@
 <?php
-/**
- * Id Library Test
- * @author Lancer He <lancer.he@gmail.com>
- * @since  2014-11-06
- */
-
 namespace Crypt\Tests;
 
 use Crypt\Id;
 
+/**
+ * Class IdTest
+ *
+ * @package Crypt\Tests
+ * @author  Lancer He <lancer.he@gmail.com>
+ */
 class IdTest extends \PHPUnit_Framework_TestCase {
 
     /**

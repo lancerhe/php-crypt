@@ -1,44 +1,38 @@
 <?php
-/**
- * AES 加解密类 need extension mcrypt.so
- * @author Alexander_Li
- */
-
 namespace Crypt;
-
+/**
+ * Class AES
+ * 加解密类 need extension mcrypt.so
+ *
+ * @package Crypt
+ * @author  Lancer He <lancer.he@gmail.com>
+ */
 class AES {
-
     /**
-     * @desc
-     * @notic cipher的值为密钥长度可以为128、192、256
+     * @desc cipher的值为密钥长度可以为128、192、256
+     * @var  string
      */
     private $__cipher = MCRYPT_RIJNDAEL_128;
-
     /**
-     * @desc  模式 CBC ECB
-     * @notic $__mode
+     * @desc 模式 CBC ECB
+     * @var  string
      */
-    private $__mode   = MCRYPT_MODE_CBC;
+    private $__mode = MCRYPT_MODE_CBC;
 
     /**
-     * @desc  AES加密
-     * 
-     * @param  string $input   明文
-     * @param  string $key     16个字符串
-     * @param  string $iv      16个字符串
-     * @return binary
+     * @param  string $input 明文
+     * @param  string $key   16个字符串
+     * @param  string $iv    16个字符串
+     * @return string
      */
     public function encrypt($input, $key, $iv) {
         return base64_encode(mcrypt_encrypt($this->__cipher, $key, $input, $this->__mode, $iv));
     }
 
-
     /**
-     * @desc  AES解密
-     * 
-     * @param  string $input    密文
-     * @param  string $key      16个字符串
-     * @param  string $iv       16个字符串
+     * @param  string $input 密文
+     * @param  string $key   16个字符串
+     * @param  string $iv    16个字符串
      * @return string
      */
     public function decrypt($input, $key, $iv) {
@@ -46,9 +40,8 @@ class AES {
         return $this->__removeExcessStr($input);
     }
 
-
     /**
-     * @desc 去掉加密后多余的字符串
+     * @desc   去掉加密后多余的字符串
      * @param  string $input 明文
      * @return string
      */

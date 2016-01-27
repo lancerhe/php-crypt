@@ -1,16 +1,18 @@
 <?php
-/**
- * RSA Library Test
- * @author Lancer He <lancer.he@gmail.com>
- * @since  2014-10-27
- */
-
 namespace Crypt\Tests;
 
 use Crypt\RSA;
 
+/**
+ * Class RSATest
+ *
+ * @package Crypt\Tests
+ * @author  Lancer He <lancer.he@gmail.com>
+ */
 class RSATest extends \PHPUnit_Framework_TestCase {
-
+    /**
+     *
+     */
     public function setUp() {
         $this->crypt = new RSA('/tmp/');
     }
@@ -97,6 +99,9 @@ class RSATest extends \PHPUnit_Framework_TestCase {
         $this->assertEquals('new message', $this->crypt->privDecrypt($encrypted));
     }
 
+    /**
+     *
+     */
     public function tearDown() {
         file_exists("/tmp/priv.key") && unlink("/tmp/priv.key");
         file_exists("/tmp/pub.key")  && unlink("/tmp/pub.key");

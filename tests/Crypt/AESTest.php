@@ -1,14 +1,14 @@
 <?php
-/**
- * AES Library Test
- * @author Lancer He <lancer.he@gmail.com>
- * @since  2014-10-27
- */
-
 namespace Crypt\Tests;
 
 use Crypt\AES;
 
+/**
+ * Class AESTest
+ *
+ * @package Crypt\Tests
+ * @author  Lancer He <lancer.he@gmail.com>
+ */
 class AESTest extends \PHPUnit_Framework_TestCase {
 
     public function setUp() {

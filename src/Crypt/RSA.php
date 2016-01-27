@@ -1,38 +1,45 @@
 <?php
-/**
- * Crypt_RSA加解密类
- */
-
 namespace Crypt;
-
+/**
+ * Class RSA
+ *
+ * @package Crypt
+ * @author  Lancer He <lancer.he@gmail.com>
+ */
 Class RSA {
-
+    /**
+     * @var resource
+     */
     protected $_private_key;
-
+    /**
+     * @var resource
+     */
     protected $_public_key;
-
+    /**
+     * @var string
+     */
     protected $_key_path = "./keys";
 
     /**
-     * @desc   设置密钥路径
-     * @param  string $path
-     * @throws Exception
+     * RSA constructor.
+     *
+     * @param string $key_path
      */
     public function __construct($key_path = '') {
-        if ( $key_path ) 
+        if ( $key_path )
             $this->_key_path = $key_path;
-
         $this->_key_path = rtrim($this->_key_path, '/');
-
-        if ( ! is_dir($this->_key_path) ) 
+        if ( ! is_dir($this->_key_path) )
             mkdir($this->_key_path, 0755, true);
     }
 
     /**
-     * 获取公钥的modulus
+     * 获取公钥模
+     *
+     * @return string
      */
     public function getPublicKeyModulus() {
-        $cmd     = 'openssl rsa -in '. $this->_key_path .'/priv.key -noout -modulus';
+        $cmd     = 'openssl rsa -in ' . $this->_key_path . '/priv.key -noout -modulus';
         $modulus = exec($cmd, $res, $ret);
         $mod     = explode('=', $modulus);
         return empty($mod[1]) ? '' : $mod[1];
@@ -40,29 +47,27 @@ Class RSA {
     }
 
     /**
-     * @desc 创建密钥对
+     * @desc  创建密钥对
+     * @param int $len
      */
-    public function createKey($len=512) {
-        $config = array(
+    public function createKey($len = 512) {
+        $config = [
             "digest_alg"       => "sha1",
             "private_key_bits" => $len,
             "private_key_type" => OPENSSL_KEYTYPE_RSA,
-            "encrypt_key"      => false
-        );
-        $r = openssl_pkey_new($config);
+            "encrypt_key"      => false,
+        ];
+        $r      = openssl_pkey_new($config);
         openssl_pkey_export($r, $priv_key);
-
         // File Output
         file_put_contents($this->_key_path . DIRECTORY_SEPARATOR . 'priv.key', $priv_key);
         $this->_private_key = openssl_pkey_get_public($priv_key);
-        $rp = openssl_pkey_get_details($r);
-        $pub_key = $rp['key'];
-
+        $rp                 = openssl_pkey_get_details($r);
+        $pub_key            = $rp['key'];
         // File Output
         file_put_contents($this->_key_path . DIRECTORY_SEPARATOR . 'pub.key', $pub_key);
         $this->_public_key = openssl_pkey_get_public($pub_key);
     }
-
 
     /**
      * @desc   设置私钥
@@ -74,7 +79,7 @@ Class RSA {
             $this->createKey();
             return true;
         }
-        $prk = file_get_contents($file);
+        $prk                = file_get_contents($file);
         $this->_private_key = openssl_pkey_get_private($prk);
         return true;
     }
@@ -89,87 +94,70 @@ Class RSA {
             $this->createKey();
             return true;
         }
-        $puk = file_get_contents($file);
+        $puk               = file_get_contents($file);
         $this->_public_key = openssl_pkey_get_public($puk);
         return true;
     }
 
     /**
-     * @desc   私钥加密
-     * @param  string $data 
-     * @return false binary
-     */
-    // public function privEncrypt($data) {
-    //     if(!is_string($data)) {
-    //         return null;
-    //     }
-    //     $this->setupPrivateKey();
-        
-    //     $r = openssl_private_encrypt($data, $encrypted, $this->_private_key);
-    //     if($r) {
-    //         return $encrypted;
-    //     }
-    //     return null;
-    // }
-
-
-    /**
-     * @desc   私钥解密
-     * @param  binary $encrypted 
-     * @return false string
+     * 私钥解密
+     *
+     * @param $encrypted
+     * @return null
      */
     public function privDecrypt($encrypted) {
-        if(!is_string($encrypted)) {
+        if ( ! is_string($encrypted) ) {
             return null;
         }
         $this->setupPrivateKey();
-        
         $r = openssl_private_decrypt(base64_decode($encrypted), $decrypted, $this->_private_key);
-        if($r) {
+        if ( $r ) {
             return $decrypted;
         }
         return null;
     }
 
-
     /**
-     * @desc   公钥加密
-     * @param  string $data 
-     * @return false binary
+     * 公钥加密
+     *
+     * @param $data
+     * @return null|string
      */
     public function pubEncrypt($data) {
-        if(!is_string($data)) {
+        if ( ! is_string($data) ) {
             return null;
         }
         $this->setupPublicKey();
-        
         $r = openssl_public_encrypt($data, $encrypted, $this->_public_key);
-        if($r) {
+        if ( $r ) {
             return base64_encode($encrypted);
         }
         return null;
     }
 
 
-    /**
-     * @desc   公钥解密
-     * @param  binary $crypted 
-     * @return false string
-     */
+    // public function privEncrypt($data) {
+    //     if(!is_string($data)) {
+    //         return null;
+    //     }
+    //     $this->setupPrivateKey();
+    //     $r = openssl_private_encrypt($data, $encrypted, $this->_private_key);
+    //     if($r) {
+    //         return $encrypted;
+    //     }
+    //     return null;
+    // }
     // public function pubDecrypt($crypted) {
     //     if(!is_string($crypted)) {
     //         return null;
     //     }
     //     $this->setupPublicKey();
-        
     //     $r = openssl_public_decrypt($crypted, $decrypted, $this->_public_key);
     //     if($r) {
     //         return $decrypted;
     //     }
     //     return null;
     // }
-
-
     public function __destruct() {
         @ fclose($this->_private_key);
         @ fclose($this->_public_key);
