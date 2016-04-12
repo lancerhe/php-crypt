@@ -1,5 +1,6 @@
 <?php
 namespace Crypt;
+
 /**
  * Class DES3
  * 3DES 加解密类, 可与java的3DES(DESede)加密方式兼容

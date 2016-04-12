@@ -10,13 +10,20 @@ use Crypt\Id;
  * @author  Lancer He <lancer.he@gmail.com>
  */
 class IdTest extends \PHPUnit_Framework_TestCase {
+    /**
+     * @var Id
+     */
+    protected $_crypt;
+
+    public function setUp() {
+        $this->_crypt = new Id();
+    }
 
     /**
      * @test
      */
     public function encrypt() {
-        $crypt   = new Id();
-        $encrypt = $crypt->encrypt(23123123);
+        $encrypt = $this->_crypt->encrypt(23123123);
         $this->assertEquals('w6lt46urq', $encrypt);
     }
 
@@ -24,8 +31,7 @@ class IdTest extends \PHPUnit_Framework_TestCase {
      * @test
      */
     public function decrypt() {
-        $crypt   = new Id();
-        $decrypt = $crypt->decrypt('1awntdz3z');
+        $decrypt = $this->_crypt->decrypt('1awntdz3z');
         $this->assertEquals(23123124, $decrypt);
     }
 
@@ -33,18 +39,15 @@ class IdTest extends \PHPUnit_Framework_TestCase {
      * @test
      */
     public function alphaIDEncrypt() {
-        $crypt   = new Id();
-        $encrypt = $crypt->alphaID(124, false, 8);
+        $encrypt = $this->_crypt->alphaID(124, false, 8);
         $this->assertEquals('qdaaaaab', $encrypt);
     }
-
 
     /**
      * @test
      */
     public function alphaIDDecrypt() {
-        $crypt   = new Id();
-        $encrypt = $crypt->alphaID('xvjaaaab', true, 8);
+        $encrypt = $this->_crypt->alphaID('xvjaaaab', true, 8);
         $this->assertEquals('12443', $encrypt);
     }
 }

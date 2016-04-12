@@ -1,5 +1,6 @@
 <?php
 namespace Crypt;
+
 /**
  * Class AuthCode
  *

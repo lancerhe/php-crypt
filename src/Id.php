@@ -1,5 +1,6 @@
 <?php
 namespace Crypt;
+
 /**
  * Class Id 短地址算法，将id数字转化定长字符串算法
  *
@@ -35,7 +36,7 @@ class Id {
      *
      * @access public
      *
-     * @param  int $id  未加密过的数字id
+     * @param  int $id 未加密过的数字id
      * @return string   加密id结果
      */
     public function encrypt($id) {
@@ -48,7 +49,7 @@ class Id {
      *
      * @access public
      *
-     * @param  string $code  已加密过的字符串
+     * @param  string $code 已加密过的字符串
      * @return int          id数字
      */
     public function decrypt($code) {
@@ -62,7 +63,7 @@ class Id {
      *
      * @access public
      *
-     * @param  int $number    需要加密的数字，如256
+     * @param  int $number 需要加密的数字，如256
      * @return int            数字的末位值，如6
      */
     public function _getNumberEnd($number) {

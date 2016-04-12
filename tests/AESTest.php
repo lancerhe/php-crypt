@@ -10,18 +10,32 @@ use Crypt\AES;
  * @author  Lancer He <lancer.he@gmail.com>
  */
 class AESTest extends \PHPUnit_Framework_TestCase {
-
+    /**
+     * @var string
+     */
+    protected $_key;
+    /**
+     * @var string
+     */
+    protected $_iv;
+    /**
+     * @var AES
+     */
+    protected $_crypt;
+    /**
+     *
+     */
     public function setUp() {
         $this->_key = 'nh9a6d2b6s6g9ynh';
         $this->_iv  = 'ddky2235gee1g3mr';
+        $this->_crypt = new AES();
     }
 
     /**
      * @test
      */
     public function encrypt() {
-        $crypt   = new AES();
-        $encrypt = $crypt->encrypt('my message', $this->_key, $this->_iv);
+        $encrypt = $this->_crypt->encrypt('my message', $this->_key, $this->_iv);
         $this->assertEquals('S5r5uy5zA7yTGIMj0rk68A==', $encrypt);
     }
 
@@ -29,8 +43,7 @@ class AESTest extends \PHPUnit_Framework_TestCase {
      * @test
      */
     public function decrypt() {
-        $crypt   = new AES();
-        $decrypt = $crypt->decrypt('S5r5uy5zA7yTGIMj0rk68A==', $this->_key, $this->_iv);
+        $decrypt = $this->_crypt->decrypt('S5r5uy5zA7yTGIMj0rk68A==', $this->_key, $this->_iv);
         $this->assertEquals('my message', $decrypt);
     }
 }

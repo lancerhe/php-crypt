@@ -1,5 +1,6 @@
 <?php
 namespace Crypt;
+
 /**
  * Class AES
  * 加解密类 need extension mcrypt.so

@@ -11,6 +11,11 @@ use Crypt\RSA;
  */
 class RSATest extends \PHPUnit_Framework_TestCase {
     /**
+     * @var RSA
+     */
+    public $crypt = null;
+
+    /**
      *
      */
     public function setUp() {
@@ -32,7 +37,6 @@ class RSATest extends \PHPUnit_Framework_TestCase {
     public function setupPrivateKey() {
         $setup_result = $this->crypt->setupPrivateKey();
         $this->assertTrue($setup_result);
-
         $key_exists_setup = $this->crypt->setupPrivateKey();
         $this->assertTrue($key_exists_setup);
     }
@@ -43,7 +47,6 @@ class RSATest extends \PHPUnit_Framework_TestCase {
     public function setupPublicKey() {
         $setup_result = $this->crypt->setupPublicKey();
         $this->assertTrue($setup_result);
-
         $key_exists_setup = $this->crypt->setupPublicKey();
         $this->assertTrue($key_exists_setup);
     }
@@ -61,7 +64,7 @@ class RSATest extends \PHPUnit_Framework_TestCase {
      * @test
      */
     public function pubEncryptParamterNotString() {
-        $encrypted = $this->crypt->pubEncrypt(array());
+        $encrypted = $this->crypt->pubEncrypt([]);
         $this->assertEquals(null, $encrypted);
     }
 
@@ -69,7 +72,7 @@ class RSATest extends \PHPUnit_Framework_TestCase {
      * @test
      */
     public function privDecryptParamterNotString() {
-        $decrypted = $this->crypt->privDecrypt(array());
+        $decrypted = $this->crypt->privDecrypt([]);
         $this->assertEquals(null, $decrypted);
     }
 
@@ -104,7 +107,7 @@ class RSATest extends \PHPUnit_Framework_TestCase {
      */
     public function tearDown() {
         file_exists("/tmp/priv.key") && unlink("/tmp/priv.key");
-        file_exists("/tmp/pub.key")  && unlink("/tmp/pub.key");
+        file_exists("/tmp/pub.key") && unlink("/tmp/pub.key");
         unset($this->crypt);
     }
 }
