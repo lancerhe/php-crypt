@@ -1,10 +1,12 @@
 {
     "name" : "lancerhe/php-crypt",
-    "description" : "php library crypt.",
+    "description" : "PHP encryption class library",
     "authors" : [
         {
             "name" : "Lancer He",
-            "email" : "lancer.he@gmail.com"
+            "email" : "lancer.he@gmail.com",
+            "homepage" : "http://www.crackedzone.com",
+            "role" : "Engineer"
         }
     ],
     "minimum-stability" : "dev",

@@ -22,12 +22,13 @@ class AESTest extends \PHPUnit_Framework_TestCase {
      * @var AES
      */
     protected $_crypt;
+
     /**
      *
      */
     public function setUp() {
-        $this->_key = 'nh9a6d2b6s6g9ynh';
-        $this->_iv  = 'ddky2235gee1g3mr';
+        $this->_key   = 'nh9a6d2b6s6g9ynh';
+        $this->_iv    = 'ddky2235gee1g3mr';
         $this->_crypt = new AES();
     }
 
