@@ -18,7 +18,7 @@ Create or modify your composer.json
 ``` json
 {
     "require": {
-        "lancerhe/php-crypt": "dev-master"
+        "lancerhe/php-crypt": "1.1.0"
     }
 }
 ```
@@ -35,7 +35,7 @@ require('./vendor/autoload.php');
 $key     = 'nh9a6d2b6s6g9ynh';
 $iv      = 'ddky2235gee1g3mr';
 $source  = 'my message';
-$crypt   = new \Crypt\AES();
+$crypt   = new \LancerHe\Crypt\AES();
 $encrypt = $crypt->encrypt($source, $key, $iv); 
 var_dump($encrypt);    // S5r5uy5zA7yTGIMj0rk68A==
 $decrypt = $crypt->decrypt($encrypt, $key, $iv);
@@ -51,7 +51,7 @@ require('./vendor/autoload.php');
 $key     = '6d2b6s6g';
 $iv      = '2235gee1';
 $source  = 'my message';
-$crypt   = new \Crypt\DES3();
+$crypt   = new \LancerHe\Crypt\DES3();
 $encrypt = $crypt->encrypt($source, $key, $iv); 
 var_dump($encrypt);    // JPZDDBXGOXZc949A+ggNlA==
 $decrypt = $crypt->decrypt($encrypt, $key, $iv);
@@ -64,7 +64,7 @@ RSA
 <?php
 require('./vendor/autoload.php');
 
-$crypt   = new \Crypt\RSA('/tmp/');
+$crypt   = new \LancerHe\Crypt\RSA('/tmp/');
 $encrypt = $crypt->pubEncrypt('new message');
 var_dump($encrypt);  // rand base64_encode
 $decrypt = $crypt->privDecrypt($encrypt);
@@ -77,7 +77,7 @@ Id
 <?php
 require('./vendor/autoload.php');
 
-$crypt   = new \Crypt\Id();
+$crypt   = new \LancerHe\Crypt\Id();
 $encrypt = $crypt->encrypt(23123123);
 var_dump($encrypt); // w6lt46urq
 $decrypt = $crypt->decrypt($encrypt);
