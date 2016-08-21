@@ -51,7 +51,7 @@ require('./vendor/autoload.php');
 $key     = '6d2b6s6g';
 $iv      = '2235gee1';
 $source  = 'my message';
-$crypt   = new \LancerHe\Crypt\DES3();
+$crypt   = new \LancerHe\Crypt\TripleDES();
 $encrypt = $crypt->encrypt($source, $key, $iv); 
 var_dump($encrypt);    // JPZDDBXGOXZc949A+ggNlA==
 $decrypt = $crypt->decrypt($encrypt, $key, $iv);
