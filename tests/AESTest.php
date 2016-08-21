@@ -1,12 +1,12 @@
 <?php
-namespace Crypt\Tests;
+namespace LancerHe\Crypt\Tests;
 
-use Crypt\AES;
+use LancerHe\Crypt\AES;
 
 /**
  * Class AESTest
  *
- * @package Crypt\Tests
+ * @package LancerHe\Crypt\Tests
  * @author  Lancer He <lancer.he@gmail.com>
  */
 class AESTest extends \PHPUnit_Framework_TestCase {

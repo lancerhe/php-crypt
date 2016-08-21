@@ -1,25 +1,25 @@
 <?php
-namespace Crypt;
+namespace LancerHe\Crypt;
 
 /**
  * Class RSA
  *
- * @package Crypt
+ * @package LancerHe\Crypt
  * @author  Lancer He <lancer.he@gmail.com>
  */
 Class RSA {
     /**
      * @var resource
      */
-    protected $_private_key;
+    private $__privateKey;
     /**
      * @var resource
      */
-    protected $_public_key;
+    private $__publicKey;
     /**
      * @var string
      */
-    protected $_key_path = "./keys";
+    private $__keyPath = "./keys";
 
     /**
      * RSA constructor.
@@ -28,10 +28,10 @@ Class RSA {
      */
     public function __construct($key_path = '') {
         if ( $key_path )
-            $this->_key_path = $key_path;
-        $this->_key_path = rtrim($this->_key_path, '/');
-        if ( ! is_dir($this->_key_path) )
-            mkdir($this->_key_path, 0755, true);
+            $this->__keyPath = $key_path;
+        $this->__keyPath = rtrim($this->__keyPath, '/');
+        if ( ! is_dir($this->__keyPath) )
+            mkdir($this->__keyPath, 0755, true);
     }
 
     /**
@@ -40,7 +40,7 @@ Class RSA {
      * @return string
      */
     public function getPublicKeyModulus() {
-        $cmd     = 'openssl rsa -in ' . $this->_key_path . '/priv.key -noout -modulus';
+        $cmd     = 'openssl rsa -in ' . $this->__keyPath . '/priv.key -noout -modulus';
         $modulus = exec($cmd, $res, $ret);
         $mod     = explode('=', $modulus);
         return empty($mod[1]) ? '' : $mod[1];
@@ -61,13 +61,13 @@ Class RSA {
         $r      = openssl_pkey_new($config);
         openssl_pkey_export($r, $priv_key);
         // File Output
-        file_put_contents($this->_key_path . DIRECTORY_SEPARATOR . 'priv.key', $priv_key);
-        $this->_private_key = openssl_pkey_get_public($priv_key);
+        file_put_contents($this->__keyPath . DIRECTORY_SEPARATOR . 'priv.key', $priv_key);
+        $this->__privateKey = openssl_pkey_get_public($priv_key);
         $rp                 = openssl_pkey_get_details($r);
         $pub_key            = $rp['key'];
         // File Output
-        file_put_contents($this->_key_path . DIRECTORY_SEPARATOR . 'pub.key', $pub_key);
-        $this->_public_key = openssl_pkey_get_public($pub_key);
+        file_put_contents($this->__keyPath . DIRECTORY_SEPARATOR . 'pub.key', $pub_key);
+        $this->__publicKey = openssl_pkey_get_public($pub_key);
     }
 
     /**
@@ -75,13 +75,13 @@ Class RSA {
      * @return boolean
      */
     public function setupPrivateKey() {
-        $file = $this->_key_path . DIRECTORY_SEPARATOR . 'priv.key';
+        $file = $this->__keyPath . DIRECTORY_SEPARATOR . 'priv.key';
         if ( ! file_exists($file) ) {
             $this->createKey();
             return true;
         }
         $prk                = file_get_contents($file);
-        $this->_private_key = openssl_pkey_get_private($prk);
+        $this->__privateKey = openssl_pkey_get_private($prk);
         return true;
     }
 
@@ -90,13 +90,13 @@ Class RSA {
      * @return boolean
      */
     public function setupPublicKey() {
-        $file = $this->_key_path . DIRECTORY_SEPARATOR . 'pub.key';
+        $file = $this->__keyPath . DIRECTORY_SEPARATOR . 'pub.key';
         if ( ! file_exists($file) ) {
             $this->createKey();
             return true;
         }
         $puk               = file_get_contents($file);
-        $this->_public_key = openssl_pkey_get_public($puk);
+        $this->__publicKey = openssl_pkey_get_public($puk);
         return true;
     }
 
@@ -111,7 +111,7 @@ Class RSA {
             return null;
         }
         $this->setupPrivateKey();
-        $r = openssl_private_decrypt(base64_decode($encrypted), $decrypted, $this->_private_key);
+        $r = openssl_private_decrypt(base64_decode($encrypted), $decrypted, $this->__privateKey);
         if ( $r ) {
             return $decrypted;
         }
@@ -129,7 +129,7 @@ Class RSA {
             return null;
         }
         $this->setupPublicKey();
-        $r = openssl_public_encrypt($data, $encrypted, $this->_public_key);
+        $r = openssl_public_encrypt($data, $encrypted, $this->__publicKey);
         if ( $r ) {
             return base64_encode($encrypted);
         }
@@ -159,8 +159,11 @@ Class RSA {
     //     }
     //     return null;
     // }
+    /**
+     *
+     */
     public function __destruct() {
-        @ fclose($this->_private_key);
-        @ fclose($this->_public_key);
+        @ fclose($this->__privateKey);
+        @ fclose($this->__publicKey);
     }
 }

@@ -1,21 +1,21 @@
 <?php
-namespace Crypt;
+namespace LancerHe\Crypt;
 
 /**
  * Class AuthCode
  *
- * @package Crypt
+ * @package LancerHe\Crypt
  * @author  Lancer He <lancer.he@gmail.com>
  */
 class AuthCode {
     /**
      * @var string;
      */
-    protected $_key;
+    private $__key;
     /**
      * @var int
      */
-    protected $_expiry = 0;
+    private $__expiry = 0;
 
     /**
      * AuthCode constructor.
@@ -23,14 +23,14 @@ class AuthCode {
      * @param $key
      */
     public function __construct($key) {
-        $this->_key = $key;
+        $this->__key = $key;
     }
 
     /**
      * @param $expiry
      */
     public function setExpiry($expiry) {
-        $this->_expiry = intval($expiry);
+        $this->__expiry = intval($expiry);
     }
 
     /**
@@ -38,7 +38,7 @@ class AuthCode {
      * @return string
      */
     public function decrypt($string) {
-        return $this->authCode($string, 'DECODE', $this->_key, $this->_expiry);
+        return $this->authCode($string, 'DECODE', $this->__key, $this->__expiry);
     }
 
     /**
@@ -46,7 +46,7 @@ class AuthCode {
      * @return string
      */
     public function encrypt($string) {
-        return $this->authCode($string, 'ENCODE', $this->_key, $this->_expiry);
+        return $this->authCode($string, 'ENCODE', $this->__key, $this->__expiry);
     }
 
     /**

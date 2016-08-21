@@ -1,10 +1,10 @@
 <?php
-namespace Crypt;
+namespace LancerHe\Crypt;
 
 /**
  * Class Id 短地址算法，将id数字转化定长字符串算法
  *
- * @package Crypt
+ * @package LancerHe\Crypt
  * @author  Lancer He <lancer.he@gmail.com>
  * @link    http://kvz.io/blog/2009/06/10/create-short-ids-with-php-like-youtube-or-tinyurl/
  */
@@ -13,12 +13,12 @@ class Id {
      * @desc 加密私钥
      * @var string
      */
-    private $_key = 'ytthni';
+    private $__key = 'ytthni';
     /**
      * @desc 首个数字保持在4以上加密结果为8位, 尾数加上偏移量以后的尾数必须保持一样, 也就是说偏移量的末尾必须为0
      * @var  array
      */
-    private $_offset = [
+    private $__offset = [
         0 => 9597199012520,
         1 => 8356536645430,
         2 => 4939453366740,
@@ -40,8 +40,8 @@ class Id {
      * @return string   加密id结果
      */
     public function encrypt($id) {
-        $id = intval($id) + $this->_offset[$this->_getNumberEnd($id)];
-        return $this->alphaID($id, false, false, $this->_key);
+        $id = intval($id) + $this->__offset[$this->_getNumberEnd($id)];
+        return $this->alphaID($id, false, false, $this->__key);
     }
 
     /**
@@ -53,8 +53,8 @@ class Id {
      * @return int          id数字
      */
     public function decrypt($code) {
-        $id = $this->alphaID($code, true, false, $this->_key);
-        $id = $id - $this->_offset[$this->_getNumberEnd($id)];
+        $id = $this->alphaID($code, true, false, $this->__key);
+        $id = $id - $this->__offset[$this->_getNumberEnd($id)];
         return $id;
     }
 

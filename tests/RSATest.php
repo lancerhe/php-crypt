@@ -1,19 +1,19 @@
 <?php
-namespace Crypt\Tests;
+namespace LancerHe\Crypt\Tests;
 
-use Crypt\RSA;
+use LancerHe\Crypt\RSA;
 
 /**
  * Class RSATest
  *
- * @package Crypt\Tests
+ * @package LancerHe\Crypt\Tests
  * @author  Lancer He <lancer.he@gmail.com>
  */
 class RSATest extends \PHPUnit_Framework_TestCase {
     /**
      * @var RSA
      */
-    public $crypt = null;
+    public $crypt;
 
     /**
      *

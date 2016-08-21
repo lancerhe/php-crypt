@@ -1,12 +1,12 @@
 <?php
-namespace Crypt\Tests;
+namespace LancerHe\Crypt\Tests;
 
-use Crypt\Id;
+use LancerHe\Crypt\Id;
 
 /**
  * Class IdTest
  *
- * @package Crypt\Tests
+ * @package LancerHe\Crypt\Tests
  * @author  Lancer He <lancer.he@gmail.com>
  */
 class IdTest extends \PHPUnit_Framework_TestCase {

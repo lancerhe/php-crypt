@@ -1,11 +1,10 @@
 <?php
-namespace Crypt;
+namespace LancerHe\Crypt;
 
 /**
  * Class AES
- * 加解密类 need extension mcrypt.so
  *
- * @package Crypt
+ * @package LancerHe\Crypt
  * @author  Lancer He <lancer.he@gmail.com>
  */
 class AES {
@@ -38,15 +37,7 @@ class AES {
      */
     public function decrypt($input, $key, $iv) {
         $input = mcrypt_decrypt($this->__cipher, $key, base64_decode($input), $this->__mode, $iv);
-        return $this->__removeExcessStr($input);
-    }
-
-    /**
-     * @desc   去掉加密后多余的字符串
-     * @param  string $input 明文
-     * @return string
-     */
-    private function __removeExcessStr($input) {
+        // @去掉加密后多余的字符串
         return rtrim($input, "\0");
     }
 }

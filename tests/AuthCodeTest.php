@@ -1,12 +1,12 @@
 <?php
-namespace Crypt\Tests;
+namespace LancerHe\Crypt\Tests;
 
-use Crypt\AuthCode;
+use LancerHe\Crypt\AuthCode;
 
 /**
  * Class AuthCodeTest
  *
- * @package Crypt\Tests
+ * @package LancerHe\Crypt\Tests
  * @author  Lancer He <lancer.he@gmail.com>
  */
 class AuthCodeTest extends \PHPUnit_Framework_TestCase {
